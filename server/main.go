@@ -32,7 +32,7 @@ func pingFunc(db *sql.DB) gin.HandlerFunc {
 
 		timeMessage := "first time!"
 		if lastDate.Valid {
-			timeMessage = fmt.Sprintf("%v ago", time.Now().Sub(lastDate.Time).String())
+			timeMessage = fmt.Sprintf("Previous ping occurred %v ago", time.Now().Sub(lastDate.Time).String())
 		}
 
 		var occurred pq.NullTime
