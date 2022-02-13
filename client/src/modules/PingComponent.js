@@ -17,6 +17,21 @@ function PingComponent() {
       });
   }, []);
 
+  const getLocale = () => {
+    return navigator.languages && navigator.languages.length
+      ? navigator.languages[0]
+      : navigator.language;
+  }
+
+  const locale = getLocale();
+
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  const formatDate = (dateItem) => {
+    const newDate = new Date(dateItem);
+    return newDate.toLocaleString(locale, { timeZone: timezone });
+  };
+
   return (
     <>
       <h1>Ping {pingState}</h1>
@@ -24,7 +39,7 @@ function PingComponent() {
       <ul>
         {occurrences &&
           occurrences.map((item) => {
-            return <li>{item}</li>;
+            return <li>{formatDate(item)}</li>;
           })}
       </ul>
     </>
